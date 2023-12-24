@@ -1,11 +1,12 @@
 import { galleryItems } from './gallery-items.js';
-// Change code below this line
-const galleryList = document.querySelector('.gallery')
-console.log(galleryItems);
-function renderGallery(items){
-    return items.map(({preview, original, description})=>{
-        return(`
-        <li class="gallery__item">
+const galleryList = document.querySelector(".gallery");
+console.log(galleryList);
+galleryList.addEventListener('click', onPicturelClick);
+
+function renderGallery(items) {
+  return items.map(({ preview, original, description }) => {
+    return (`
+      <li class="gallery__item">
         <a class="gallery__link" href="${original}">
           <img
             class="gallery__image"
@@ -14,8 +15,22 @@ function renderGallery(items){
             data-source="${original}"
           />
         </a>
-      </li>    
-        `)
-    })
+      </li>
+    `);
+  }).join('');
 }
-galleryList.insertAdjacentHTML('beforeend',renderGallery(galleryItems))
+
+galleryList.insertAdjacentHTML("beforeend", renderGallery(galleryItems))
+
+function onPicturelClick(event) {
+  event.preventDefault()
+  if (event.target.className === 'gallery__image') {
+    // console.log("works");
+    // console.log("parentNpde", event.target.parentNode);
+    const instance = basicLightbox.create(`
+    <img src="${event.target.parentNode}" width="800" height="600">
+`)
+
+instance.show()
+  }
+}
