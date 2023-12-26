@@ -18,3 +18,6 @@ function createGallery(items) {
   }).join('');
 }
 galleryContainer.insertAdjacentHTML('beforeend', createGallery(galleryItems));
+const lightbox = new SimpleLightbox('.gallery a',{
+    captionsData: 'alt', captionPosition: 'bottom', captionDelay: 250
+})
